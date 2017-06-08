@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.winter.mapper.ProductFormMapper">
+  <resultMap id="BaseResultMap" type="com.cn.winter.pojo.ProductForm">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="assembly_id" jdbcType="VARCHAR" property="assemblyId" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="total_price" jdbcType="VARCHAR" property="totalPrice" />
+    <result column="diameter" jdbcType="VARCHAR" property="diameter" />
+    <result column="customer_product_id" jdbcType="VARCHAR" property="customerProductId" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="order_form_id" jdbcType="VARCHAR" property="orderFormId" />
+    <result column="oe_number" jdbcType="VARCHAR" property="oeNumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, assembly_id, number, price, total_price, diameter, customer_product_id, tags, 
+    description, order_form_id, oe_number
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_product_form
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findProductFormByOrderFormId" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select 
+  	*
+  	from t_product_form 
+  	where order_form_id = #{orderFormId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_product_form
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.winter.pojo.ProductForm">
+    insert into t_product_form (id, assembly_id, number, 
+      price, total_price, diameter, 
+      customer_product_id, tags, description, 
+      order_form_id, oe_number)
+    values (#{id,jdbcType=INTEGER}, #{assemblyId,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, 
+      #{price,jdbcType=VARCHAR}, #{totalPrice,jdbcType=VARCHAR}, #{diameter,jdbcType=VARCHAR}, 
+      #{customerProductId,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{orderFormId,jdbcType=VARCHAR}, #{oeNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.winter.pojo.ProductForm">
+    insert into t_product_form
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="assemblyId != null">
+        assembly_id,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="totalPrice != null">
+        total_price,
+      </if>
+      <if test="diameter != null">
+        diameter,
+      </if>
+      <if test="customerProductId != null">
+        customer_product_id,
+      </if>
+      <if test="tags != null">
+        tags,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="orderFormId != null">
+        order_form_id,
+      </if>
+      <if test="oeNumber != null">
+        oe_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="assemblyId != null">
+        #{assemblyId,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null">
+        #{totalPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="diameter != null">
+        #{diameter,jdbcType=VARCHAR},
+      </if>
+      <if test="customerProductId != null">
+        #{customerProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="orderFormId != null">
+        #{orderFormId,jdbcType=VARCHAR},
+      </if>
+      <if test="oeNumber != null">
+        #{oeNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.winter.pojo.ProductForm">
+    update t_product_form
+    <set>
+      <if test="assemblyId != null">
+        assembly_id = #{assemblyId,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null">
+        total_price = #{totalPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="diameter != null">
+        diameter = #{diameter,jdbcType=VARCHAR},
+      </if>
+      <if test="customerProductId != null">
+        customer_product_id = #{customerProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="orderFormId != null">
+        order_form_id = #{orderFormId,jdbcType=VARCHAR},
+      </if>
+      <if test="oeNumber != null">
+        oe_number = #{oeNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.winter.pojo.ProductForm">
+    update t_product_form
+    set assembly_id = #{assemblyId,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      total_price = #{totalPrice,jdbcType=VARCHAR},
+      diameter = #{diameter,jdbcType=VARCHAR},
+      customer_product_id = #{customerProductId,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      order_form_id = #{orderFormId,jdbcType=VARCHAR},
+      oe_number = #{oeNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

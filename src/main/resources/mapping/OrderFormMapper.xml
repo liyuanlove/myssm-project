@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.winter.mapper.OrderFormMapper">
+  <resultMap id="BaseResultMap" type="com.cn.winter.pojo.OrderForm">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_from_id" jdbcType="VARCHAR" property="orderFromId" />
+    <result column="customer_id" jdbcType="VARCHAR" property="customerId" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="start_time" jdbcType="VARCHAR" property="startTime" />
+    <result column="end_time" jdbcType="VARCHAR" property="endTime" />
+    <result column="order_status" jdbcType="VARCHAR" property="orderStatus" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="out_time" jdbcType="VARCHAR" property="outTime" />
+    <result column="total_prices" jdbcType="VARCHAR" property="totalPrices" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_from_id, customer_id, create_time, customer_name, start_time, end_time, 
+    order_status, tags, description, out_time, total_prices
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_orderForm
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findAllOrderFormByStatus" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select 
+  	*
+  	from t_orderForm 
+  	where 
+  	order_status = #{status, jdbcType=VARCHAR}
+  </select>
+  <select id="findOrderFormByOrderFormId" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select 
+  	*
+  	from t_orderForm
+  	where 
+  	order_from_id = #{formId, jdbcType=VARCHAR}
+  </select>
+  <select id="findOrderFormByCustomerAndTime" resultMap="BaseResultMap">
+	select 
+	*
+	from t_orderForm
+	where 1=1
+	<if test="customerId != null">
+		and customer_id = #{customerId,jdbcType=VARCHAR}
+	</if> 
+	<if test="startTime != null">
+		and start_time 	&gt;= #{startTime,jdbcType=VARCHAR}
+	</if> 
+	<if test="endTime != null">
+		and end_time &lt;= #{endTime,jdbcType=VARCHAR}
+	</if>
+	<if test="orderStatus != null">
+		and order_status = #{orderStatus,jdbcType=VARCHAR}
+	</if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_orderForm
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.winter.pojo.OrderForm">
+    insert into t_orderForm (id, order_from_id, customer_id, 
+      create_time, customer_name, start_time, 
+      end_time, order_status, tags, 
+      description, out_time, total_prices
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderFromId,jdbcType=VARCHAR}, #{customerId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=VARCHAR}, #{orderStatus,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{outTime,jdbcType=VARCHAR}, #{totalPrices,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.winter.pojo.OrderForm">
+    insert into t_orderForm
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderFromId != null">
+        order_from_id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="customerName != null">
+        customer_name,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="tags != null">
+        tags,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="outTime != null">
+        out_time,
+      </if>
+      <if test="totalPrices != null">
+        total_prices,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderFromId != null">
+        #{orderFromId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="outTime != null">
+        #{outTime,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrices != null">
+        #{totalPrices,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.winter.pojo.OrderForm">
+    update t_orderForm
+    <set>
+      <if test="orderFromId != null">
+        order_from_id = #{orderFromId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="outTime != null">
+        out_time = #{outTime,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrices != null">
+        total_prices = #{totalPrices,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

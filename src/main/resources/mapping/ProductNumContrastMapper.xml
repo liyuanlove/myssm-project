@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.winter.mapper.ProductNumContrastMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.winter.pojo.ProductNumContrast" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="assembly_id" property="assemblyId" jdbcType="VARCHAR" />
+    <result column="customer_pro_id" property="customerProId" jdbcType="VARCHAR" />
+    <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+    <result column="tags" property="tags" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="oe_number" property="oeNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, assembly_id, customer_pro_id, customer_id, tags, description, oe_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_product_num_contrast
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findCustomerProductByCustomerId" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select 
+  	*
+  	from t_product_num_contrast
+  	where customer_id = #{customerId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_product_num_contrast
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.winter.pojo.ProductNumContrast" >
+    insert into t_product_num_contrast (id, assembly_id, customer_pro_id, 
+      customer_id, tags, description, 
+      oe_number)
+    values (#{id,jdbcType=INTEGER}, #{assemblyId,jdbcType=VARCHAR}, #{customerProId,jdbcType=VARCHAR}, 
+      #{customerId,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{oeNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.winter.pojo.ProductNumContrast" >
+    insert into t_product_num_contrast
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="assemblyId != null" >
+        assembly_id,
+      </if>
+      <if test="customerProId != null" >
+        customer_pro_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="tags != null" >
+        tags,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="oeNumber != null" >
+        oe_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="assemblyId != null" >
+        #{assemblyId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerProId != null" >
+        #{customerProId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null" >
+        #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="oeNumber != null" >
+        #{oeNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.winter.pojo.ProductNumContrast" >
+    update t_product_num_contrast
+    <set >
+      <if test="assemblyId != null" >
+        assembly_id = #{assemblyId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerProId != null" >
+        customer_pro_id = #{customerProId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null" >
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="oeNumber != null" >
+        oe_number = #{oeNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.winter.pojo.ProductNumContrast" >
+    update t_product_num_contrast
+    set assembly_id = #{assemblyId,jdbcType=VARCHAR},
+      customer_pro_id = #{customerProId,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      oe_number = #{oeNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

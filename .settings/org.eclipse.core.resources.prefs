@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+encoding//src/main/java/com/cn/winter/mapper/AssemblyMapper.java=UTF-8
+encoding//src/main/java/com/cn/winter/mapper/RoleMapper.java=UTF-8
+encoding//src/main/java/com/cn/winter/mapper/ShipmentsMapper.java=UTF-8
+encoding//src/main/java/com/cn/winter/mapper/SparePartsMapper.java=UTF-8
+encoding//src/main/java/com/cn/winter/mapper/SupplierMapper.java=UTF-8
+encoding//src/main/java/com/cn/winter/mapper/UserMapper.java=UTF-8
+encoding//src/main/java/com/cn/winter/pojo/Supplier.java=UTF-8
+encoding//src/main/resources/jdbc.properties=UTF-8
+encoding//src/main/resources/log4j.properties=UTF-8
+encoding//src/main/resources/spring-mybatis.xml=UTF-8
+encoding//src/test/java/com/cn/test/PartTest.java=UTF-8
+encoding/<project>=UTF-8

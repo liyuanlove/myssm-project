@@ -1,0 +1,34 @@
+body{
+                margin:0;
+            }
+            #progress {
+                position:fixed;
+                height: 2px;
+                background:#2085c5;
+                transition:opacity 500ms linear
+            }
+            #progress.done {
+                opacity:0
+            }
+            #progress span {
+                position:absolute;
+                height:2px;
+                -webkit-box-shadow:#2085c5 1px 0 6px 1px;
+                -webkit-border-radius:100%;
+                opacity:1;
+                width:150px;
+                right:-10px;
+                -webkit-animation:pulse 2s ease-out 0s infinite;
+            }
+
+            @-webkit-keyframes pulse {
+                30% {
+                    opacity:.6
+                }
+                60% {
+                    opacity:0;
+                }
+                100% {
+                    opacity:.6
+                }
+}
