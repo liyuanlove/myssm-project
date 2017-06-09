@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.cn.winter.exception.CustomerException;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +20,8 @@ import com.cn.winter.service.customer.CustomerService;
 /*客户管理层*/
 @Controller
 public class CustomerController extends BaseController{
+
+	private final Logger logger = Logger.getLogger(this.getClass());
 
 	@Resource(name="customerService")
 	private CustomerService customerService;
@@ -41,14 +45,20 @@ public class CustomerController extends BaseController{
 	
 	public Map<String, Object> addCustomer(Customer customer){
 		Map<String, Object> map = new HashMap<>();
-		Integer count = customerService.addCustomer(customer);
-		if(count != 0){
-			map.put("data", 200);
-		}else{
-			map.put("data", 202);
-			map.put("message", "添加出错，请重试");
+		try{
+
+			Integer count = customerService.addCustomer(customer);
+			if(count != 0){
+				map.put("data", 200);
+			}else{
+				map.put("data", 202);
+				map.put("message", "添加出错，请重试");
+			}
+		}catch (CustomerException e){
+			map.put("data", e.getMessage());
+			logger.error(e.getMessage(),e);
 		}
-		
+
 		return map;
 	}
 	
